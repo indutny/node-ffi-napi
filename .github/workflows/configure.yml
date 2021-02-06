@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -15,7 +15,7 @@ jobs:
         shell: bash
         run: |
           cd deps/libffi
-          ./configure --enable-static --disable-shared --disable-builddir --with-pic
+          ./configure --enable-static --disable-shared --disable-builddir --with-pic --build=i386-pc-mingw
       - name: Archive build configuration
         uses: actions/upload-artifact@v2
         with:
