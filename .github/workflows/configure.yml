@@ -26,6 +26,6 @@ jobs:
         with:
           name: dist-without-markdown
           path: |
-            fficonfig.h
-            include/ffi.h
-            include/ffitarget.h
+            deps/libffi/fficonfig.h
+            deps/libffi/include/ffi.h
+            deps/libffi/include/ffitarget.h
