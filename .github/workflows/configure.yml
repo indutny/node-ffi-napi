@@ -1,0 +1,31 @@
+name: Upload config
+
+on: [push]
+
+jobs:
+  build_and_test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        arch: [x64, x86]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'latest'
+          architecture: ${{ matrix.arch }}
+      - name: Configure libffi
+        run: |
+          cd deps/libffi
+          ./configure --enable-static --disable-shared --disable-builddir --with-pic
+      - name: Archive build configuration
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-without-markdown
+          path: |
+            fficonfig.h
+            include/ffi.h
+            include/ffitarget.h
