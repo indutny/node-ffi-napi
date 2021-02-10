@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [macos-latest]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -15,7 +15,7 @@ jobs:
         shell: bash
         run: |
           cd deps/libffi
-          ./configure --enable-static --disable-shared --disable-builddir --with-pic --build=i386-pc-mingw32
+          CC="clang -m32" CXX="clang++ -m32" ./configure --enable-static --disable-shared --disable-builddir --with-pic --build=i386-apple-darwin20.3.0 --target=i386-apple-darwin20.3.0 --host=i386-apple-darwin20.3.0
       - name: Archive build configuration
         uses: actions/upload-artifact@v2
         with:
