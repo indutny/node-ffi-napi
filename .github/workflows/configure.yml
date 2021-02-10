@@ -15,7 +15,7 @@ jobs:
         shell: bash
         run: |
           cd deps/libffi
-          CC="clang -m32" CXX="clang++ -m32" ./configure --enable-static --disable-shared --disable-builddir --with-pic --build=i386-apple-darwin20.3.0 --target=i386-apple-darwin20.3.0 --host=i386-apple-darwin20.3.0
+          CC="$CC -m32" CXX="$CXX -m32" ./configure --enable-static --disable-shared --disable-builddir --with-pic --build=i386-apple-darwin20.3.0 --target=i386-apple-darwin20.3.0 --host=i386-apple-darwin20.3.0
       - name: Archive build configuration
         uses: actions/upload-artifact@v2
         with:
